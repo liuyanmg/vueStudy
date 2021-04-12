@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id = "app">
+    <h1>当前计数：{{counter}}</h1>
+    <!--直接使用变量，不适合复杂语法-->
+    <!--<button v-on:click="counter ++">+</button>
+    <button v-on:click="counter &#45;&#45;">-</button>-->
+    <!--语法1-->
+    <!--<button v-on:click="plus">+</button>
+    <button v-on:click="reduce">-</button>-->
+    <!--语法2-->
+    <button @click="plus">+</button>
+    <button @click="reduce">-</button>
+</div>
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            counter: 0
+        },
+        methods: {
+            plus: function (){
+                this.counter ++;
+                console.log("点击加号");
+            },
+            reduce: function (){
+                this.counter--;
+                console.log("点击减号");
+            }
+        }
+    })
+</script>
+</body>
+</html>

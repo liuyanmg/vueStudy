@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .default {
+
+        }
+
+        .active {
+            color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,index) in movies" @click="getClass(index,this)" :class="{active: currentIndex === index}">{{item}}</li>
+    </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            currentIndex: 0,
+            movies: ['1', '2', '3', '4']
+        },
+        methods: {
+            getClass: function (index){
+                this.currentIndex = index;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

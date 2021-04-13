@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+</head>
+<body>
+<div id="app">
+    <div v-show="isShow">
+        <table border="1px" boder-collapse="collapse">
+            <thead>
+            <tr>
+                <th width="40">索引</th>
+                <th width="120">书籍名称</th>
+                <th width="70">出版日期</th>
+                <th width="40">价格</th>
+                <th width="70">数量</th>
+                <th width="60">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item, index) in bookies">
+                <td width="40px">{{index + 1}}</td>
+                <td width="120px">{{item.name}}</td>
+                <td width="70px">{{item.publishDate}}</td>
+                <td width="40px">{{item.price | finalPrice}}</td>
+                <td width="70px">
+                    <button @click="decrement(index)">-</button>
+                    {{item.num}}
+                    <button @click="increment(index)">+</button>
+                </td>
+                <td width="60px">
+                    <button @click="removeBook(index)">移除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>总价：{{totalPrice | finalPrice}}</div>
+    </div>
+    <h2 v-show="!isShow">购物车为空</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            bookies: [
+                {name: "算法导论", publishDate: "2006-9", "price": 85, "num": 1}
+                , {name: "Unix编程艺术", publishDate: "2006-2", "price": 59, "num": 1}
+                , {name: "编程珠玑", publishDate: "2006-10", "price": 39, "num": 1}
+                , {name: "代码大全", publishDate: "2006-3", "price": 128, "num": 1}
+            ],
+            isShow: true
+        },
+        methods: {
+            removeBook(index) {
+                this.bookies.splice(index, 1);
+                if (!this.bookies || this.bookies.length === 0) {
+                    this.isShow = false;
+                }
+            },
+            increment(index) {
+                this.bookies[index].num++;
+            },
+            decrement(index) {
+                if (this.bookies[index].num > 0)
+                    this.bookies[index].num--;
+            }
+        },
+        computed: {
+            totalPrice() {
+                let totalPrice = 0;
+                for (let item of this.bookies) {
+                    totalPrice += item.price * item.num;
+                }
+
+                return totalPrice;
+            }
+        },
+        filters: {
+            finalPrice(price) {
+                return "¥" + price.toFixed(2);
+            }
+        }
+    })
+
+    let arr = [[1, 2], [3, 4], [5, 6], [7]]
+    let arr1 = arr.reduce((a, b) => a.concat(b))
+        debugger
+</script>
+
+</body>
+</html>

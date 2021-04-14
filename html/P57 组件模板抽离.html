@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn></cpn>
+    <cpn2></cpn2>
+</div>
+<template id="temp">
+    <div>
+        <h2>模板抽离写法--局部组件</h2>
+    </div>
+</template>
+<template id="temp2">
+    <div>
+        <h2>模板抽离写法--全局组件</h2>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    Vue.component("cpn2",{
+        template: "#temp2"
+    })
+
+    const app = new Vue({
+        el: "#app",
+        components: {
+            cpn: {
+                // 注意#符号
+                template: '#temp'
+            }
+        }
+    })
+</script>
+</body>
+</html>

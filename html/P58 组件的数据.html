@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<template id="temp">
+    <div>
+        {{title}}
+    </div>
+</template>
+<div id="app">
+    <cpn></cpn>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            currentIndex: 0,
+            movies: ['1', '2', '3', '4']
+        },
+        components: {
+            cpn: {
+                template: "#temp",
+                // data为一个函数，这样才能return一个匿名对象。为每个组件创建一个单独的数据对象
+                data() {
+                    return {
+                        title: "标题"
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
